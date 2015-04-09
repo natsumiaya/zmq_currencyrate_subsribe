@@ -5,6 +5,9 @@ import time
 import unicodedata
 import urllib
 
+currency_from = "IDR"
+currency_to = "USD"
+
 port = "5556"
 if len(sys.argv) > 1:
     port = sys.argv[1]
@@ -15,7 +18,7 @@ socket = context.socket(zmq.PUB)
 socket.bind("tcp://*:%s" % port)
 
 while True:
-    url = urllib.urlopen('http://jsonrates.com/get/?from=IDR&to=USD&apiKey=jr-9ad516c8b5a8d4e15065d8251c947552').read()
+    url = urllib.urlopen('http://jsonrates.com/get/?from='+ currency_from +'&to='+ currency_to +'&apiKey=jr-9ad516c8b5a8d4e15065d8251c947552').read()
 
     result = json.loads(url)
     # print 'IDR to USD rates:', result['rate']
